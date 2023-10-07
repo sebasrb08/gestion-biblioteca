@@ -5,12 +5,10 @@ let modal = document.querySelector(".modales")
 let boton = document.querySelector(".boton")
 let ordenar = document.querySelector(".ordenar")
 
-
 let cont =1
-
+let cambiar
 let biblioteca = JSON.parse(localStorage.getItem("biblioteca"))
 
-console.log(informacion[3].value)
 mostrarTarjeta()
 
 function mostrarTarjeta(){
@@ -47,7 +45,7 @@ function mostrarTarjeta(){
             botonEstado.textContent="Cambiar Estado"
             // let prestar = document.createElement("p")
             // prestar.textContent=`Prestado A:${element.prestar}`
-            
+
             
             div2.appendChild(h)
             div2.appendChild(autores)
@@ -66,9 +64,22 @@ function mostrarTarjeta(){
 
           
         });
-        
-    }
+        cambiar=document.querySelectorAll(".btn-success")
 }
+    for (let i = 0; i < cambiar.length; i++) {
+        cambiar[i].addEventListener("click",()=>{
+            if (biblioteca[i].estado == "Disponible"){
+                
+                biblioteca[i].estado="Prestado"
+                
+            }else{
+                biblioteca[i].estado="Disponible"
+            }
+            borrar()
+            mostrarTarjeta()
+        })
+    } 
+}  
 function borrar(){
     div=document.querySelectorAll(".card")
     console.log(div)
@@ -159,3 +170,4 @@ boton.addEventListener("click",()=>{
 
 
 })
+
