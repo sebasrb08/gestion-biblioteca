@@ -19,8 +19,7 @@ function mostrarTarjeta(){
         biblioteca.forEach(element => {
             let div = document.createElement("div")
             div.classList.add("card")
-            div.setAttribute("data-bs-toggle","modal")
-            div.setAttribute("data-bs-target","#exampleModal")
+
             
             let img = document.createElement("img")
             img.classList.add("card-img-top")
@@ -40,18 +39,23 @@ function mostrarTarjeta(){
             let año = document.createElement("p")
             año.textContent=`Año:${element.año}`
 
-            let disponible = document.createElement("p")
-            disponible.textContent=`Disponible:${element.disponible}`
+            let estado = document.createElement("p")
+            estado.textContent=`Estado:${element.estado}`
 
-            let prestar = document.createElement("p")
-            prestar.textContent=`Prestado A:${element.prestar}`
+            let botonEstado = document.createElement("button");
+            botonEstado.classList.add("btn","btn-success")
+            botonEstado.textContent="Cambiar Estado"
+            // let prestar = document.createElement("p")
+            // prestar.textContent=`Prestado A:${element.prestar}`
             
             
             div2.appendChild(h)
             div2.appendChild(autores)
             div2.appendChild(año)
-            div2.appendChild(disponible)
-            div2.appendChild(prestar)
+            div2.appendChild(estado)
+            div2.appendChild(botonEstado)
+
+            // div2.appendChild(prestar)
 
 
             
@@ -65,7 +69,6 @@ function mostrarTarjeta(){
         
     }
 }
-
 function borrar(){
     div=document.querySelectorAll(".card")
     console.log(div)
@@ -91,9 +94,9 @@ enviar.addEventListener("click",()=>{
             titulo:informacion[0].value,
             autor:informacion[1].value,
             año:informacion[2].value,
-            disponible:(informacion[3].value== "1")? true:false,
-            prestar:"camper",
-            url:informacion[5].value
+            estado:"Disponible",
+            prestar:null,
+            url:informacion[3].value
             }
         )
         console.log(biblioteca)
@@ -104,9 +107,9 @@ enviar.addEventListener("click",()=>{
             titulo:informacion[0].value,
             autor:informacion[1].value,
             año:informacion[2].value,
-            disponible:(informacion[3].value== "Si")? true:false,
-            prestar:"camper",
-            url:informacion[5].value
+            estado:"Disponible",
+            prestar:null,
+            url:informacion[3].value
         }]
         console.log(biblioteca)
     }
@@ -123,8 +126,8 @@ boton.addEventListener("click",()=>{
     let valor=ordenar.value
     if(valor == "1"){
         biblioteca.sort((a,b)=>{
-            let titleA = a.titulo
-            let titleB = b.titulo
+            let titleA = a.titulo.toLowerCase()
+            let titleB = b.titulo.toLowerCase()
             if (titleA < titleB) {
                 return -1;
               }
@@ -133,7 +136,26 @@ boton.addEventListener("click",()=>{
               }
         })
     }
+    else if (valor == "2") {
+        biblioteca.sort((a, b) => a.año - b.año);
+    }
+    else if(valor == "3"){
+        biblioteca.sort((a,b)=>{
+            let titleA = a.autor.toLowerCase()
+            let titleB = b.autor.toLowerCase()
+            if (titleA < titleB) {
+                return -1;
+              }
+              if (titleA > titleB) {
+                return 1;
+              }
+        })
+    }
+
+    console.log(biblioteca);
     borrar()
     mostrarTarjeta()
+
+
 
 })

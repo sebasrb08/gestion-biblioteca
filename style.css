@@ -27,7 +27,7 @@ h1{
 }
 
 .card{
-    width: 21%;
+    width: 20%;
     background-color:var(--accent-200);
     transition: all 300ms;
 }
@@ -41,6 +41,5 @@ img{
 }
 
 .tarj{
-    display: flex;
-    justify-content: center;
+
 }
