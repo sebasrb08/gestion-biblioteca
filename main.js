@@ -124,6 +124,9 @@ function añadirTarjeta(){
     let boton=ele[8]
     cambiarEstado(cambiar,pres,boton)
     
+    elimi= document.querySelectorAll(".btn-danger")
+    borrarTarjeta()
+
 }
 
 function crearElementos (){
@@ -212,7 +215,7 @@ function cambiarEstado(cambiar){
             mostrarPrestado(index)
             mostrarModal(index)
             permanenciaDatos()
-            
+
             reset2()
         }
         
